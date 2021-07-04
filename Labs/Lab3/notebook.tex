@@ -1,0 +1,1336 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Lab3}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Lab Three: Extending Logistic
+Regression}\label{lab-three-extending-logistic-regression}
+
+\paragraph{Machine Learning in Python}\label{machine-learning-in-python}
+
+Will Lacey - 45906124 - CSE7324 Roger Wong - 43867412 - CSE5324
+
+    \subsection{Preparation and Overview (30 points
+total)}\label{preparation-and-overview-30-points-total}
+
+ {[}20 points{]} Explain the task and what business-case or use-case it
+is designed to solve (or designed to investigate). Detail exactly what
+the classification task is and what parties would be interested in the
+results. For example, would the model be deployed or use mostly for
+offline analysis? 
+
+    \paragraph{Business Understanding}\label{business-understanding}
+
+Dataset description: ``The data was obtained in a student survey in both
+Portuguese language and Math courses in secondary school. It contains a
+lot of interesting social, gender, and study information about students.
+You can use it for some EDA or try to predict student's susceptibility
+to alcohol.'' Collected in 2008.
+
+This dataset has more than 1000 students and 33 features (34 in
+consideration of which school a student is from) that includes both
+categorical and numerical data.
+
+We will be looking at what factors affect student grades. In the dataset
+are three grades, G1, G2, and G3, which all range from 0-19. In this
+study, we will take the mean of all the grades and then divide them into
+three categories. Mean grades less than 10 are classified as 0, which
+refelect the potential of failing. Mean grades between 10 and 14 are
+classified as 1, which reflect an equivalent grade to that of a C- or B.
+And lastly, mean grades between 15 and 19 are classified as 2, which is
+more or less excelling. Our Multi-Class Logistic Regression will
+classify the data into those three mean grade classes and determine
+which students are in need of academic support.
+
+Our business case is to see how the factors we chose affects a students
+overall grade. As our classifier trains with the dataset, it will be
+able to tell a students overall grade with the given information. The
+one issue that may arise in the event of rolling out this software to
+schools is that it is effectively profiling students. However, if
+schools use the software to help accepted students succeed, this program
+will be beneficial despite its ethical ramifications.
+
+We believe schools, parents, and colleges will be interested in our
+business-case because they will be able to better provide support and
+resources to students, allowing them to achieve the best possible
+grades. If our classifier has a high enough percentage, then support
+systems can see which students will struggle the most in the future. We
+will be able to predict which students need the most help, even if
+students don't realize what kind of situation they are in.
+
+    \paragraph{Measure of Success}\label{measure-of-success}
+
+Now in order for our classifier to be actually useful to our interested
+parties, we need to determine an appropriate measure of success. There
+are two situations we need to pay attention to. One is a false positive
+where our classifier determines a student will fail but instead they
+succeed. The second is a false negative where our classifier determines
+a student will succeed but instead they fail. If our classifier provides
+too many false positives, then that means extra school resources won't
+go to students in need. If there are too many false negatives then the
+failing students will slide under the radar and not get enough extra
+support. The false negatives take higher priority since the stuggling
+students won't get the right resources. Alternatively, if passing
+students get more resources, it isn't the end of the world. Truthfully,
+the worst case in this scenario is simply that passing students receive
+attention that could have gone to failing students.
+
+    \paragraph{Import Modules and
+Initialization}\label{import-modules-and-initialization}
+
+Alright. Before we begin, let's import essential packages for data
+analysis
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{import} \PY{n}{figure}
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{ShuffleSplit}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{accuracy\PYZus{}score}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{special} \PY{k}{import} \PY{n}{expit}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{optimize} \PY{k}{import} \PY{n}{minimize\PYZus{}scalar}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{optimize} \PY{k}{import} \PY{n}{fmin\PYZus{}bfgs}
+         \PY{k+kn}{import} \PY{n+nn}{warnings}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}
+         \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ignore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{warnings}\PY{o}{.}\PY{n}{simplefilter}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+ne}{DeprecationWarning}\PY{p}{)}
+         
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+     {[}5 points{]} (mostly the same processes as from previous labs) Define
+and prepare your class variables. Use proper variable representations
+(int, float, one-hot, etc.). Use pre-processing methods (as needed) for
+dimensionality reduction, scaling, etc. Remove variables that are not
+needed/useful for the analysis. Describe the final dataset that is used
+for classification/regression (include a description of any newly formed
+variables you created). 
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k}{try}\PY{p}{:}
+             \PY{n}{df\PYZus{}mat} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{student\PYZhy{}mat.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} read in the csv file}
+             \PY{n}{df\PYZus{}por} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{student\PYZhy{}por.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} read in the csv file}
+             \PY{n}{df\PYZus{}mat}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{math}\PY{l+s+s2}{\PYZdq{}}
+             \PY{n}{df\PYZus{}por}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{portuguese}\PY{l+s+s2}{\PYZdq{}}
+             \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{df\PYZus{}mat}\PY{p}{,} \PY{n}{df\PYZus{}por}\PY{p}{]}\PY{p}{,} \PY{n}{ignore\PYZus{}index}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Succeeded to Open File.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{except} \PY{n+ne}{IOError}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Failed to Open Files. Quitting Program.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{sys}\PY{o}{.}\PY{n}{exit}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Succeeded to Open File.
+
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 1044 entries, 0 to 1043
+Data columns (total 34 columns):
+school        1044 non-null object
+sex           1044 non-null object
+age           1044 non-null int64
+address       1044 non-null object
+famsize       1044 non-null object
+Pstatus       1044 non-null object
+Medu          1044 non-null int64
+Fedu          1044 non-null int64
+Mjob          1044 non-null object
+Fjob          1044 non-null object
+reason        1044 non-null object
+guardian      1044 non-null object
+traveltime    1044 non-null int64
+studytime     1044 non-null int64
+failures      1044 non-null int64
+schoolsup     1044 non-null object
+famsup        1044 non-null object
+paid          1044 non-null object
+activities    1044 non-null object
+nursery       1044 non-null object
+higher        1044 non-null object
+internet      1044 non-null object
+romantic      1044 non-null object
+famrel        1044 non-null int64
+freetime      1044 non-null int64
+goout         1044 non-null int64
+Dalc          1044 non-null int64
+Walc          1044 non-null int64
+health        1044 non-null int64
+absences      1044 non-null int64
+G1            1044 non-null int64
+G2            1044 non-null int64
+G3            1044 non-null int64
+class         1044 non-null object
+dtypes: int64(16), object(18)
+memory usage: 277.4+ KB
+None
+
+    \end{Verbatim}
+
+    In trying to predict grades, we decided to use our first lab assignment
+to best select appropriate variables. Any variables that we noticed to
+have a lack of correlation to grades, we dropped for simplicity.
+Additionally, we removed information such as absences, so that we could
+make the assumption that our program would only be used on information
+prior to the beginning of a semester. This is so a school could aid
+potentially weaker students before they began to fall behind.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{target} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{target}\PY{p}{[}\PY{p}{(}\PY{n}{target} \PY{o}{\PYZlt{}} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{n}{target}\PY{p}{[}\PY{p}{(}\PY{n}{target} \PY{o}{\PYZlt{}} \PY{l+m+mi}{15} \PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{target} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{n}{target}\PY{p}{[}\PY{p}{(}\PY{n}{target} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2}
+        \PY{n}{target} \PY{o}{=} \PY{n}{target}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+        
+        \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}
+            \PY{n}{columns}\PY{o}{=}\PY{p}{[}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{school}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{famsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mjob}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fjob}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reason}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{guardian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{traveltime}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{famsup}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{paid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{activities}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nursery}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{internet}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{romantic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{famrel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{freetime}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{goout}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{health}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{absences}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G3}\PY{l+s+s1}{\PYZsq{}}
+        \PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    To better prepare the dataset, we decided to one hot encode and binary
+encode several variables.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{one\PYZus{}hot\PYZus{}encode}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{feature}\PY{p}{)}\PY{p}{:}
+            \PY{n}{one\PYZus{}hot} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{feature}\PY{p}{]}\PY{p}{,} \PY{n}{prefix} \PY{o}{=} \PY{n}{feature}\PY{p}{)}
+            \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{n}{feature}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{df}\PY{p}{,} \PY{n}{one\PYZus{}hot}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{k}{return} \PY{n}{df}
+        
+        \PY{k}{def} \PY{n+nf}{binary\PYZus{}encode}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{feature}\PY{p}{)}\PY{p}{:}
+            \PY{n}{binary} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{feature}\PY{p}{]}\PY{p}{,} \PY{n}{prefix} \PY{o}{=} \PY{n}{feature}\PY{p}{)}
+            \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{n}{feature}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{df}\PY{p}{,} \PY{n}{binary}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{k}{return} \PY{n}{df}
+        
+        \PY{n}{data} \PY{o}{=} \PY{n}{binary\PYZus{}encode}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data} \PY{o}{=} \PY{n}{binary\PYZus{}encode}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pstatus}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data} \PY{o}{=} \PY{n}{binary\PYZus{}encode}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{higher}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data} \PY{o}{=} \PY{n}{binary\PYZus{}encode}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{address}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data} \PY{o}{=} \PY{n}{binary\PYZus{}encode}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{schoolsup}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{data} \PY{o}{=} \PY{n}{one\PYZus{}hot\PYZus{}encode}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+     {[}5 points{]} Divide you data into training and testing data using an
+80\% training and 20\% testing split. Use the cross validation modules
+that are part of scikit-learn. Argue "for" or "against" splitting your
+data using an 80/20 split. That is, why is the 80/20 split appropriate
+(or not) for your dataset?\\
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Excelling Student Count:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{(}\PY{n}{target}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Passing Student Count:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{(}\PY{n}{target}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Failing Student Count:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{(}\PY{n}{target}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Excelling Student Count: 142
+Passing Student Count: 581
+Failing Student Count: 321
+
+    \end{Verbatim}
+
+    Hmm. This is kind of a problem. Because our classes aren't exactly
+numerous, it will be hard to train our classifier effectively for each
+class. Since we are also dividing our classes into an 80/20 split, it
+will be worrisome that some classes are rarer than others.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{num\PYZus{}cv\PYZus{}iterations} \PY{o}{=} \PY{l+m+mi}{3}
+        \PY{n}{num\PYZus{}instances} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+        \PY{n}{cv\PYZus{}object} \PY{o}{=} \PY{n}{ShuffleSplit}\PY{p}{(}
+                                 \PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{n}{num\PYZus{}cv\PYZus{}iterations}\PY{p}{,}
+                                 \PY{n}{test\PYZus{}size}  \PY{o}{=} \PY{l+m+mf}{0.2}
+        \PY{p}{)}
+\end{Verbatim}
+
+
+    The following cell demos the cross validation module part of
+scikit-learn.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{split\PYZus{}count} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{k}{for} \PY{n}{train\PYZus{}indices}\PY{p}{,} \PY{n}{test\PYZus{}indices} \PY{o+ow}{in} \PY{n}{cv\PYZus{}object}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{target}\PY{p}{)}\PY{p}{:} 
+            \PY{n}{split\PYZus{}count} \PY{o}{=} \PY{n}{split\PYZus{}count} \PY{o}{+} \PY{l+m+mi}{1}
+            
+            \PY{n}{data\PYZus{}train} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{train\PYZus{}indices}\PY{p}{]}
+            \PY{n}{target\PYZus{}train} \PY{o}{=} \PY{n}{target}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{train\PYZus{}indices}\PY{p}{]}
+            
+            \PY{n}{data\PYZus{}test} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{test\PYZus{}indices}\PY{p}{]}
+            \PY{n}{target\PYZus{}test} \PY{o}{=} \PY{n}{target}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{test\PYZus{}indices}\PY{p}{]}
+            
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Split Iteration:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{split\PYZus{}count}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{training data:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}train}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{training target:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{target\PYZus{}train}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test data:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}test}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test target:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{target\PYZus{}test}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+            
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Split Iteration: 1
+-------------------
+training data: 835
+training target: 835
+test data: 209
+test target: 209
+
+Split Iteration: 2
+-------------------
+training data: 835
+training target: 835
+test data: 209
+test target: 209
+
+Split Iteration: 3
+-------------------
+training data: 835
+training target: 835
+test data: 209
+test target: 209
+
+
+    \end{Verbatim}
+
+    Most of the time, data scientist split data into 80/20, also known as
+Pareto's principle. Because our data isn't time sensitive, we believe
+that an 80/20 split is sufficient for training our classifier. Although,
+our classes don't exactly follow an equal distribution. On this front,
+an 80/20 split in our data could prove harmful, since rarer classes may
+be considered less. On top of this, because we have about 800 instances
+for the training data and about 200 instances for our testing data, we
+believe that our training may yield inaccurate results. This is due to
+the fact that overall, our dataset is lacking a sufficient amount of
+entries. It would be much nicer if we had 3000 students, 1000 for each
+grade class, so that we could best find the differences in students and
+what can be best used to determine grades. Regardless, for the purpose
+of this lab, we still believe, despite our concerns, that a random 80/20
+will be sufficient.
+
+    \subsection{Modeling (50 points total)}\label{modeling-50-points-total}
+
+ The implementation of logistic regression must be written only from the
+examples given to you by the instructor. No credit will be assigned to
+teams that copy implementations from another source, regardless of if
+the code is properly cited. {[}20 points{]} Create a custom,
+one-versus-all logistic regression classifier using numpy and scipy to
+optimize. Use object oriented conventions identical to scikit-learn. You
+should start with the template developed by the instructor in the
+course. You should add the following functionality to the logistic
+regression classifier: Ability to choose optimization technique when
+class is instantiated: either steepest descent, stochastic gradient
+descent, or Newton's method. Update the gradient calculation to include
+a customizable regularization term (either using no regularization, L1
+regularization, L2 regularization, or both L1 and L2 regularization).
+Associate a cost with the regularization term, "C", that can be adjusted
+when the class is instantiated.\\
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{class} \PY{n+nc}{BinaryLogisticRegression}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{eta}\PY{p}{,} \PY{n}{iterations}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{,} \PY{n}{reg\PYZus{}method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{null}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{eta} \PY{o}{=} \PY{n}{eta}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{iters} \PY{o}{=} \PY{n}{iterations}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C} \PY{o}{=} \PY{n}{C}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{reg\PYZus{}method} \PY{o}{=} \PY{n}{reg\PYZus{}method}
+                \PY{c+c1}{\PYZsh{} internally we will store the weights as self.w\PYZus{} to keep with sklearn conventions}
+        
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if}\PY{p}{(}\PY{n+nb}{hasattr}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Binary Logistic Regression Object with coefficients:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Untrained Binary Logistic Regression Object}\PY{l+s+s1}{\PYZsq{}}
+        
+            \PY{c+c1}{\PYZsh{} convenience, private:}
+            \PY{n+nd}{@staticmethod}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}add\PYZus{}bias}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{X}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} add bias term}
+        
+            \PY{n+nd}{@staticmethod}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}sigmoid}\PY{p}{(}\PY{n}{theta}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} increase stability, redefine sigmoid operation}
+                \PY{k}{return} \PY{n}{expit}\PY{p}{(}\PY{n}{theta}\PY{p}{)} \PY{c+c1}{\PYZsh{}1/(1+np.exp(\PYZhy{}theta))}
+        
+            \PY{c+c1}{\PYZsh{} vectorized gradient calculation with regularization using specified Norm}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}get\PYZus{}gradient}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{:}
+                \PY{n}{ydiff} \PY{o}{=} \PY{n}{y}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{add\PYZus{}bias}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} get y difference}
+                \PY{n}{gradient} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{X} \PY{o}{*} \PY{n}{ydiff}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{} make ydiff a column vector and multiply through}
+                \PY{n}{gradient} \PY{o}{=} \PY{n}{gradient}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+                
+                \PY{k}{if} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{reg\PYZus{}method}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{gradient}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C} \PY{o}{*} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{o}{/}\PY{n+nb}{abs}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{)} 
+                \PY{k}{elif} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{reg\PYZus{}method}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{gradient}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C}
+                \PY{k}{elif} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{reg\PYZus{}method}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Both}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{gradient}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C} \PY{o}{*} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{o}{/}\PY{n+nb}{abs}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{gradient}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{gradient}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} 
+                \PY{k}{return} \PY{n}{gradient}
+        
+            \PY{c+c1}{\PYZsh{} public:}
+            \PY{k}{def} \PY{n+nf}{predict\PYZus{}proba}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{X}\PY{p}{,}\PY{n}{add\PYZus{}bias}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} add bias term if requested}
+                \PY{n}{Xb} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}add\PYZus{}bias}\PY{p}{(}\PY{n}{X}\PY{p}{)} \PY{k}{if} \PY{n}{add\PYZus{}bias} \PY{k}{else} \PY{n}{X}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}sigmoid}\PY{p}{(}\PY{n}{Xb} \PY{o}{@} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} return the probability y=1}
+        
+            \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{X}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.5}\PY{p}{)} \PY{c+c1}{\PYZsh{}return the actual prediction}
+        
+            \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+                \PY{n}{Xb} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}add\PYZus{}bias}\PY{p}{(}\PY{n}{X}\PY{p}{)} \PY{c+c1}{\PYZsh{} add bias term}
+                \PY{n}{num\PYZus{}samples}\PY{p}{,} \PY{n}{num\PYZus{}features} \PY{o}{=} \PY{n}{Xb}\PY{o}{.}\PY{n}{shape}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}features}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} for as many as the max iterations}
+                \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{iters}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{gradient} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}get\PYZus{}gradient}\PY{p}{(}\PY{n}{Xb}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}} \PY{o}{+}\PY{o}{=} \PY{n}{gradient}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{eta} \PY{c+c1}{\PYZsh{} multiply by learning rate }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{class} \PY{n+nc}{LineSearchLogisticRegression}\PY{p}{(}\PY{n}{BinaryLogisticRegression}\PY{p}{)}\PY{p}{:}
+            
+            \PY{c+c1}{\PYZsh{} define custom line search for problem}
+            \PY{n+nd}{@staticmethod}
+            \PY{k}{def} \PY{n+nf}{line\PYZus{}search\PYZus{}function}\PY{p}{(}\PY{n}{eta}\PY{p}{,}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{w}\PY{p}{,}\PY{n}{grad}\PY{p}{,}\PY{n}{C}\PY{p}{,}\PY{n}{reg\PYZus{}method}\PY{p}{)}\PY{p}{:}
+                \PY{n}{wnew} \PY{o}{=} \PY{n}{w} \PY{o}{\PYZhy{}} \PY{n}{grad}\PY{o}{*}\PY{n}{eta}
+                \PY{n}{g} \PY{o}{=} \PY{n}{expit}\PY{p}{(}\PY{n}{X} \PY{o}{@} \PY{n}{wnew}\PY{p}{)}
+                \PY{k}{if} \PY{p}{(}\PY{n}{reg\PYZus{}method}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{return} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{g}\PY{p}{[}\PY{n}{y}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{g}\PY{p}{[}\PY{n}{y}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{C}\PY{o}{*}\PY{n+nb}{sum}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{wnew}\PY{p}{)}\PY{p}{)} 
+                \PY{k}{elif} \PY{p}{(}\PY{n}{reg\PYZus{}method}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{return} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{g}\PY{p}{[}\PY{n}{y}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{g}\PY{p}{[}\PY{n}{y}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{C}\PY{o}{*}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{wnew}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                \PY{k}{elif} \PY{p}{(}\PY{n}{reg\PYZus{}method}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Both}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{g}\PY{p}{[}\PY{n}{y}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{g}\PY{p}{[}\PY{n}{y}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{C}\PY{o}{*}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{wnew}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{n}{C}\PY{o}{*}\PY{n+nb}{sum}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{wnew}\PY{p}{)}\PY{p}{)} 
+                \PY{k}{else}\PY{p}{:}
+                    \PY{k}{return} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{g}\PY{p}{[}\PY{n}{y}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{g}\PY{p}{[}\PY{n}{y}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                
+            \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+                \PY{n}{Xb} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}add\PYZus{}bias}\PY{p}{(}\PY{n}{X}\PY{p}{)} \PY{c+c1}{\PYZsh{} add bias term}
+                \PY{n}{num\PYZus{}samples}\PY{p}{,} \PY{n}{num\PYZus{}features} \PY{o}{=} \PY{n}{Xb}\PY{o}{.}\PY{n}{shape}
+                
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}features}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} init weight vector to ones}
+                
+                \PY{c+c1}{\PYZsh{} for as many as the max iterations}
+                \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{iters}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{gradient} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}get\PYZus{}gradient}\PY{p}{(}\PY{n}{Xb}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+                    
+                    \PY{c+c1}{\PYZsh{} do line search in gradient direction, using scipy function}
+                    \PY{n}{opts} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{maxiter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{iters}\PY{o}{/}\PY{l+m+mi}{20}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} unclear exactly what this should be}
+                    \PY{n}{res} \PY{o}{=} \PY{n}{minimize\PYZus{}scalar}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{line\PYZus{}search\PYZus{}function}\PY{p}{,} \PY{c+c1}{\PYZsh{} objective function to optimize}
+                                          \PY{n}{bounds}\PY{o}{=}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{eta}\PY{o}{/}\PY{l+m+mi}{1000}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{eta}\PY{o}{*}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,} \PY{c+c1}{\PYZsh{}bounds to optimize}
+                                          \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{Xb}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{p}{,}\PY{n}{gradient}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{reg\PYZus{}method}\PY{p}{)}\PY{p}{,}
+                                          \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bounded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{c+c1}{\PYZsh{} bounded optimization for speed}
+                                          \PY{n}{options}\PY{o}{=}\PY{n}{opts}\PY{p}{)} \PY{c+c1}{\PYZsh{} set max iterations}
+                    
+                    \PY{n}{eta} \PY{o}{=} \PY{n}{res}\PY{o}{.}\PY{n}{x} \PY{c+c1}{\PYZsh{} get optimal learning rate}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}} \PY{o}{+}\PY{o}{=} \PY{n}{gradient}\PY{o}{*}\PY{n}{eta} \PY{c+c1}{\PYZsh{} set new function values}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{class} \PY{n+nc}{StochasticLogisticRegression}\PY{p}{(}\PY{n}{BinaryLogisticRegression}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} stochastic gradient calculation }
+             \PY{k}{def} \PY{n+nf}{\PYZus{}get\PYZus{}gradient}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{idx} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{p}{)}\PY{o}{*}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} grab random instance}
+                 \PY{n}{ydiff} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{,}\PY{n}{add\PYZus{}bias}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)} \PY{c+c1}{\PYZsh{} get y difference (now scalar)}
+                 \PY{n}{gradient} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{idx}\PY{p}{]} \PY{o}{*} \PY{n}{ydiff}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]} \PY{c+c1}{\PYZsh{} make ydiff a column vector and multiply through}
+         
+                 \PY{n}{gradient} \PY{o}{=} \PY{n}{gradient}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+                 \PY{k}{if} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{reg\PYZus{}method}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{gradient}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C} \PY{o}{*} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{o}{/}\PY{n+nb}{abs}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{)} 
+                 \PY{k}{elif} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{reg\PYZus{}method}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{gradient}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C}
+                 \PY{k}{elif} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{reg\PYZus{}method}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Both}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{gradient}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C} \PY{o}{*} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{o}{/}\PY{n+nb}{abs}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{gradient}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{gradient}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} 
+                     
+                 \PY{k}{return} \PY{n}{gradient}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{class} \PY{n+nc}{BFGSLogisticRegression}\PY{p}{(}\PY{n}{BinaryLogisticRegression}\PY{p}{)}\PY{p}{:}
+         
+             \PY{n+nd}{@staticmethod}
+             \PY{k}{def} \PY{n+nf}{objective\PYZus{}function}\PY{p}{(}\PY{n}{w}\PY{p}{,}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{C}\PY{p}{,}\PY{n}{reg\PYZus{}method}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{g} \PY{o}{=} \PY{n}{expit}\PY{p}{(}\PY{n}{X} \PY{o}{@} \PY{n}{w}\PY{p}{)}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{reg\PYZus{}method}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{return} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{g}\PY{p}{[}\PY{n}{y}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{g}\PY{p}{[}\PY{n}{y}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{C}\PY{o}{*}\PY{n+nb}{sum}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{w}\PY{p}{)}\PY{p}{)}  
+                 \PY{k}{elif} \PY{p}{(}\PY{n}{reg\PYZus{}method}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{return} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{g}\PY{p}{[}\PY{n}{y}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{g}\PY{p}{[}\PY{n}{y}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{C}\PY{o}{*}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{w}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{k}{elif} \PY{p}{(}\PY{n}{reg\PYZus{}method}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Both}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{return} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{g}\PY{p}{[}\PY{n}{y}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{g}\PY{p}{[}\PY{n}{y}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{C}\PY{o}{*}\PY{n+nb}{sum}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{w}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{C}\PY{o}{*}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{w}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}  
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{k}{return} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{g}\PY{p}{[}\PY{n}{y}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{g}\PY{p}{[}\PY{n}{y}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{n+nd}{@staticmethod}
+             \PY{k}{def} \PY{n+nf}{objective\PYZus{}gradient}\PY{p}{(}\PY{n}{w}\PY{p}{,}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{C}\PY{p}{,}\PY{n}{reg\PYZus{}method}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{g} \PY{o}{=} \PY{n}{expit}\PY{p}{(}\PY{n}{X} \PY{o}{@} \PY{n}{w}\PY{p}{)}
+                 \PY{n}{ydiff} \PY{o}{=} \PY{n}{y}\PY{o}{\PYZhy{}}\PY{n}{g} \PY{c+c1}{\PYZsh{} get y difference}
+                 \PY{n}{gradient} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{X} \PY{o}{*} \PY{n}{ydiff}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n}{gradient} \PY{o}{=} \PY{n}{gradient}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{w}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{reg\PYZus{}method}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{gradient}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o}{*} \PY{n}{C} \PY{o}{*} \PY{p}{(}\PY{n}{w}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{o}{/}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{w}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{)} 
+                 \PY{k}{elif} \PY{p}{(}\PY{n}{reg\PYZus{}method}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{gradient}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{*} \PY{n}{C}
+                 \PY{k}{elif} \PY{p}{(}\PY{n}{reg\PYZus{}method}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Both}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{gradient}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{*} \PY{n}{C} \PY{o}{+} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o}{*} \PY{n}{C} \PY{o}{*} \PY{p}{(}\PY{n}{w}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{o}{/}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{w}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{)} 
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{gradient}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{gradient}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} 
+                 \PY{k}{return} \PY{o}{\PYZhy{}}\PY{n}{gradient}
+         
+             \PY{c+c1}{\PYZsh{} just overwrite fit function}
+             \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{Xb} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}add\PYZus{}bias}\PY{p}{(}\PY{n}{X}\PY{p}{)} \PY{c+c1}{\PYZsh{} add bias term}
+                 \PY{n}{num\PYZus{}samples}\PY{p}{,} \PY{n}{num\PYZus{}features} \PY{o}{=} \PY{n}{Xb}\PY{o}{.}\PY{n}{shape}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}} \PY{o}{=} \PY{n}{fmin\PYZus{}bfgs}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{objective\PYZus{}function}\PY{p}{,} \PY{c+c1}{\PYZsh{} what to optimize}
+                                     \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}features}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{c+c1}{\PYZsh{} starting point}
+                                     \PY{n}{fprime}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{objective\PYZus{}gradient}\PY{p}{,} \PY{c+c1}{\PYZsh{} gradient function}
+                                     \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{Xb}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{reg\PYZus{}method}\PY{p}{)}\PY{p}{,} \PY{c+c1}{\PYZsh{} extra args for gradient and objective function}
+                                     \PY{n}{gtol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}03}\PY{p}{,} \PY{c+c1}{\PYZsh{} stopping criteria for gradient, |v\PYZus{}k|}
+                                     \PY{n}{maxiter}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{iters}\PY{p}{,} \PY{c+c1}{\PYZsh{} stopping criteria iterations}
+                                     \PY{n}{disp}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}features}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k}{class} \PY{n+nc}{MultiClassLogisticRegression}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{eta}\PY{p}{,} \PY{n}{iterations}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.0001}\PY{p}{,} \PY{n}{opt\PYZus{}method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{null}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{reg\PYZus{}method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{null}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{eta} \PY{o}{=} \PY{n}{eta}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{iters} \PY{o}{=} \PY{n}{iterations}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C} \PY{o}{=} \PY{n}{C}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{opt\PYZus{}method} \PY{o}{=} \PY{n}{opt\PYZus{}method}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{reg\PYZus{}method} \PY{o}{=} \PY{n}{reg\PYZus{}method}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{classifiers\PYZus{}} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{c+c1}{\PYZsh{} internally we will store the weights as self.w\PYZus{} to keep with sklearn conventions}
+         
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if}\PY{p}{(}\PY{n+nb}{hasattr}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MultiClass Logistic Regression Object with coefficients:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Untrained MultiClass Logistic Regression Object}\PY{l+s+s1}{\PYZsq{}}
+         
+             \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{num\PYZus{}samples}\PY{p}{,} \PY{n}{num\PYZus{}features} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{unique\PYZus{}} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} get each unique class value}
+                 \PY{n}{num\PYZus{}unique\PYZus{}classes} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{unique\PYZus{}}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{classifiers\PYZus{}} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{} will fill this array with binary classifiers}
+         
+                 \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{n}{yval} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{unique\PYZus{}}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} for each unique value}
+                     \PY{n}{y\PYZus{}binary} \PY{o}{=} \PY{n}{y}\PY{o}{==}\PY{n}{yval} \PY{c+c1}{\PYZsh{} create a binary problem}
+                     \PY{c+c1}{\PYZsh{} train the binary classifier for this class}
+                     \PY{k}{if}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{opt\PYZus{}method}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sd}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{blr} \PY{o}{=} \PY{n}{LineSearchLogisticRegression}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{eta}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{iters}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{reg\PYZus{}method}\PY{p}{)}
+                     \PY{k}{elif}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{opt\PYZus{}method}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sgd}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{blr} \PY{o}{=} \PY{n}{StochasticLogisticRegression}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{eta}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{iters}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{reg\PYZus{}method}\PY{p}{)}
+                     \PY{k}{elif}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{opt\PYZus{}method}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bfgs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{blr} \PY{o}{=} \PY{n}{BFGSLogisticRegression}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{eta}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{iters}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{reg\PYZus{}method}\PY{p}{)}
+                     \PY{k}{else}\PY{p}{:}
+                         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Error: Optimization Method Not Found}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                         \PY{k}{return}
+                     \PY{n}{blr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y\PYZus{}binary}\PY{p}{)}
+                     \PY{c+c1}{\PYZsh{} add the trained classifier to the list}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{classifiers\PYZus{}}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{blr}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} save all the weights into one matrix, separate column for each class}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{[}\PY{n}{x}\PY{o}{.}\PY{n}{w\PYZus{}} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{classifiers\PYZus{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         
+             \PY{k}{def} \PY{n+nf}{predict\PYZus{}proba}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{X}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{probs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{k}{for} \PY{n}{blr} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{classifiers\PYZus{}}\PY{p}{:}
+                     \PY{n}{probs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{blr}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} get probability for each classifier}
+         
+                 \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{n}{probs}\PY{p}{)} \PY{c+c1}{\PYZsh{} make into single matrix}
+         
+             \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{X}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} take argmax along row}
+\end{Verbatim}
+
+
+    Steepest Descent
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{lr} \PY{o}{=} \PY{n}{MultiClassLogisticRegression}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{p}{,}\PY{n}{iterations}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{,} \PY{n}{opt\PYZus{}method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sd}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{reg\PYZus{}method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{lr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{target}\PY{p}{)}
+         
+         \PY{n}{prediction} \PY{o}{=} \PY{n}{lr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy of: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{target}\PY{p}{,}\PY{n}{prediction}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accuracy of:  0.5565134099616859
+
+    \end{Verbatim}
+
+    Stochastic Gradient Descent
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{lr} \PY{o}{=} \PY{n}{MultiClassLogisticRegression}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{p}{,}\PY{n}{iterations}\PY{o}{=}\PY{l+m+mi}{2000}\PY{p}{,}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{,} \PY{n}{opt\PYZus{}method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sgd}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{reg\PYZus{}method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{lr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{target}\PY{p}{)}
+         
+         \PY{n}{prediction} \PY{o}{=} \PY{n}{lr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy of: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{target}\PY{p}{,}\PY{n}{prediction}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accuracy of:  0.6216475095785441
+
+    \end{Verbatim}
+
+    Newton's Method
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{lr} \PY{o}{=} \PY{n}{MultiClassLogisticRegression}\PY{p}{(}\PY{n}{\PYZus{}}\PY{p}{,}\PY{n}{iterations}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{,} \PY{n}{opt\PYZus{}method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bfgs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{reg\PYZus{}method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Both}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{lr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{target}\PY{p}{)}
+         
+         \PY{n}{prediction} \PY{o}{=} \PY{n}{lr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy of: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{target}\PY{p}{,}\PY{n}{prediction}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accuracy of:  0.6408045977011494
+
+    \end{Verbatim}
+
+     {[}15 points{]} Train your classifier to achieve good generalization
+performance. That is, adjust the optimization technique and the value of
+the regularization term "C" to achieve the best performance on your test
+set. Visualize the performance of the classifier versus the parameters
+you investigated. Is your method of selecting parameters justified? That
+is, do you think there is any "data snooping" involved with this method
+of selecting parameters? 
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}gallery}\PY{p}{(}\PY{n}{c\PYZus{}values}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{)}\PY{p}{)}
+             \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{count} \PY{o}{=} \PY{n}{count} \PY{o}{+} \PY{l+m+mi}{1}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{count} \PY{o}{==} \PY{l+m+mi}{1} \PY{p}{:}
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Steepest Descent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{k}{elif} \PY{n}{i} \PY{o}{==} \PY{l+m+mi}{4}\PY{p}{:}
+                         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stochastic Gradient Descent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{k}{else}\PY{p}{:} 
+                         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Newton}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{s Method}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{k}{elif} \PY{n}{count} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{:}
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{k}{elif} \PY{n}{count} \PY{o}{==} \PY{l+m+mi}{3}\PY{p}{:}
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Both}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{graph\PYZus{}c\PYZus{}values}\PY{p}{(}\PY{n}{c\PYZus{}values}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{graph\PYZus{}c\PYZus{}values}\PY{p}{(}\PY{n}{arr}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{arr}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{arr}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{calculate\PYZus{}c\PYZus{}values}\PY{p}{(}\PY{n}{eta}\PY{p}{,} \PY{n}{iterations}\PY{p}{,} \PY{n}{opt\PYZus{}method}\PY{p}{,} \PY{n}{reg\PYZus{}method}\PY{p}{)}\PY{p}{:}
+             \PY{n}{arr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+             \PY{n}{step\PYZus{}count} \PY{o}{=} \PY{l+m+mi}{1000}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{step\PYZus{}count}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{C} \PY{o}{=} \PY{p}{(}\PY{n}{i} \PY{o}{/} \PY{n}{step\PYZus{}count}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{0.4}
+                 \PY{n}{lr} \PY{o}{=} \PY{n}{MultiClassLogisticRegression}\PY{p}{(}\PY{n}{eta}\PY{p}{,}\PY{n}{iterations}\PY{p}{,} \PY{n}{C}\PY{p}{,} \PY{n}{opt\PYZus{}method}\PY{p}{,} \PY{n}{reg\PYZus{}method}\PY{p}{)}
+                 \PY{n}{lr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{target}\PY{p}{)} \PY{c+c1}{\PYZsh{} reference to global variables}
+                 \PY{n}{prediction} \PY{o}{=} \PY{n}{lr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+                 \PY{n}{accuracy} \PY{o}{=} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{target}\PY{p}{,}\PY{n}{prediction}\PY{p}{)}
+                 \PY{n}{arr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{arr}\PY{p}{,} \PY{p}{[}\PY{p}{[}\PY{n}{C}\PY{p}{,} \PY{n}{accuracy}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{k}{return} \PY{n}{arr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{c+c1}{\PYZsh{} Removes initialization term}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{time}
+         
+         sns.set(style=\PYZsq{}darkgrid\PYZsq{})
+         
+         eta = 0.001
+         iterations = 50
+         c\PYZus{}values = []
+         c\PYZus{}values.append(calculate\PYZus{}c\PYZus{}values(eta, iterations, \PYZsq{}sd\PYZsq{}, \PYZsq{}None\PYZsq{}))
+         c\PYZus{}values.append(calculate\PYZus{}c\PYZus{}values(eta, iterations, \PYZsq{}sd\PYZsq{}, \PYZsq{}L1\PYZsq{}))
+         c\PYZus{}values.append(calculate\PYZus{}c\PYZus{}values(eta, iterations, \PYZsq{}sd\PYZsq{}, \PYZsq{}L2\PYZsq{}))
+         c\PYZus{}values.append(calculate\PYZus{}c\PYZus{}values(eta, iterations, \PYZsq{}sd\PYZsq{}, \PYZsq{}Both\PYZsq{}))
+         c\PYZus{}values.append(calculate\PYZus{}c\PYZus{}values(eta, iterations*20, \PYZsq{}sgd\PYZsq{}, \PYZsq{}None\PYZsq{}))
+         c\PYZus{}values.append(calculate\PYZus{}c\PYZus{}values(eta, iterations*20, \PYZsq{}sgd\PYZsq{}, \PYZsq{}L1\PYZsq{}))
+         c\PYZus{}values.append(calculate\PYZus{}c\PYZus{}values(eta, iterations*20, \PYZsq{}sgd\PYZsq{}, \PYZsq{}L2\PYZsq{}))
+         c\PYZus{}values.append(calculate\PYZus{}c\PYZus{}values(eta, iterations*20, \PYZsq{}sgd\PYZsq{}, \PYZsq{}Both\PYZsq{}))
+         c\PYZus{}values.append(calculate\PYZus{}c\PYZus{}values(eta, iterations, \PYZsq{}bfgs\PYZsq{}, \PYZsq{}None\PYZsq{}))
+         c\PYZus{}values.append(calculate\PYZus{}c\PYZus{}values(eta, iterations, \PYZsq{}bfgs\PYZsq{}, \PYZsq{}L1\PYZsq{}))
+         c\PYZus{}values.append(calculate\PYZus{}c\PYZus{}values(eta, iterations, \PYZsq{}bfgs\PYZsq{}, \PYZsq{}L2\PYZsq{}))
+         c\PYZus{}values.append(calculate\PYZus{}c\PYZus{}values(eta, iterations, \PYZsq{}bfgs\PYZsq{}, \PYZsq{}Both\PYZsq{}))
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+CPU times: user 2h 35min 50s, sys: 3min 52s, total: 2h 39min 42s
+Wall time: 40min 31s
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{plot\PYZus{}gallery}\PY{p}{(}\PY{n}{c\PYZus{}values}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}18}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    After running each optimization method with each regularization, we
+determined that Newton's method without a regularization (a C value
+equal to 0) is most accurate in classification. Undoubtedly, we believe
+we went through sufficient measures to select the best optimization and
+regularization method for classification. Additionally, We found that
+low values of C didn't really effect our steepest descent optimization,
+but unfortunately, its accuracy never neared that of Newton's method.
+The X-labels for each graph represents the C values. The Y-labels for
+each graph represents the accuracy score
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{num\PYZus{}cv\PYZus{}iterations} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{num\PYZus{}instances} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+         \PY{n}{cv\PYZus{}object} \PY{o}{=} \PY{n}{ShuffleSplit}\PY{p}{(}
+                                  \PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{n}{num\PYZus{}cv\PYZus{}iterations}\PY{p}{,}
+                                  \PY{n}{test\PYZus{}size}  \PY{o}{=} \PY{l+m+mf}{0.2}
+         \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{time}
+         
+         split\PYZus{}count = 0
+         accuracies = np.array([])
+         for train\PYZus{}indices, test\PYZus{}indices in cv\PYZus{}object.split(data,target): 
+             split\PYZus{}count = split\PYZus{}count + 1
+             
+             data\PYZus{}train = data.loc[train\PYZus{}indices]
+             target\PYZus{}train = target.loc[train\PYZus{}indices]
+             
+             data\PYZus{}test = data.loc[test\PYZus{}indices]
+             target\PYZus{}test = target.loc[test\PYZus{}indices]
+             
+             lr = MultiClassLogisticRegression(\PYZus{}, iterations=1000, C=0, opt\PYZus{}method=\PYZsq{}bfgs\PYZsq{}, reg\PYZus{}method=\PYZsq{}Both\PYZsq{})
+             lr.fit(data, target) 
+         
+             prediction = lr.predict(data\PYZus{}test)
+             accuracy = accuracy\PYZus{}score(target\PYZus{}test,prediction)
+             accuracies = np.append(accuracies, accuracy)
+             
+             print(\PYZsq{}Iteration\PYZsq{}, split\PYZus{}count,\PYZsq{}\PYZhy{} Accuracy of:\PYZsq{}, accuracy)
+             print()
+             
+         print(\PYZsq{}Average Accuracy of our best logistic regression implementation:\PYZsq{}, np.mean(accuracies))
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iteration 1 - Accuracy of: 0.6220095693779905
+
+Iteration 2 - Accuracy of: 0.6602870813397129
+
+Iteration 3 - Accuracy of: 0.6650717703349283
+
+Iteration 4 - Accuracy of: 0.6650717703349283
+
+Iteration 5 - Accuracy of: 0.645933014354067
+
+Iteration 6 - Accuracy of: 0.5933014354066986
+
+Iteration 7 - Accuracy of: 0.6411483253588517
+
+Iteration 8 - Accuracy of: 0.631578947368421
+
+Iteration 9 - Accuracy of: 0.6076555023923444
+
+Iteration 10 - Accuracy of: 0.6411483253588517
+
+Average Accuracy of our best logistic regression implementation: 0.6373205741626794
+CPU times: user 4.33 s, sys: 5.93 s, total: 10.3 s
+Wall time: 10.6 s
+
+    \end{Verbatim}
+
+    In ten iterations of shuffling our data into either training or testing
+and running a logistic regression clasifier, we found our average
+percentage to be about xx taking a total of yy seconds.
+
+     {[}15 points{]} Compare the performance of your "best" logistic
+regression optimization procedure to the procedure used in scikit-learn.
+Visualize the performance differences in terms of training time and
+classification performance. Discuss the results. 
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{time}
+         
+         split\PYZus{}count = 0
+         accuracies = np.array([])
+         for train\PYZus{}indices, test\PYZus{}indices in cv\PYZus{}object.split(data,target): 
+             split\PYZus{}count = split\PYZus{}count + 1
+             
+             data\PYZus{}train = data.loc[train\PYZus{}indices]
+             target\PYZus{}train = target.loc[train\PYZus{}indices]
+             
+             data\PYZus{}test = data.loc[test\PYZus{}indices]
+             target\PYZus{}test = target.loc[test\PYZus{}indices]
+             
+             lr\PYZus{}sk = LogisticRegression(solver=\PYZsq{}liblinear\PYZsq{}) 
+             lr\PYZus{}sk.fit(data\PYZus{}train, target\PYZus{}train) 
+         
+             prediction = lr\PYZus{}sk.predict(data\PYZus{}test)
+             accuracy = accuracy\PYZus{}score(target\PYZus{}test,prediction)
+             accuracies = np.append(accuracies, accuracy)
+             
+             print(\PYZsq{}Iteration\PYZsq{}, split\PYZus{}count,\PYZsq{}\PYZhy{} Accuracy of:\PYZsq{}, accuracy)
+             print()
+             
+         print(\PYZsq{}Average Accuracy of scikit\PYZhy{}learn:\PYZsq{}, np.mean(accuracies))
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iteration 1 - Accuracy of: 0.5980861244019139
+
+Iteration 2 - Accuracy of: 0.6028708133971292
+
+Iteration 3 - Accuracy of: 0.6411483253588517
+
+Iteration 4 - Accuracy of: 0.6555023923444976
+
+Iteration 5 - Accuracy of: 0.6602870813397129
+
+Iteration 6 - Accuracy of: 0.6555023923444976
+
+Iteration 7 - Accuracy of: 0.6555023923444976
+
+Iteration 8 - Accuracy of: 0.6746411483253588
+
+Iteration 9 - Accuracy of: 0.6985645933014354
+
+Iteration 10 - Accuracy of: 0.6698564593301436
+
+Average Accuracy of scikit-learn: 0.651196172248804
+CPU times: user 130 ms, sys: 13.5 ms, total: 143 ms
+Wall time: 182 ms
+
+    \end{Verbatim}
+
+    \paragraph{Speed Test}\label{speed-test}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{time}
+         lr = MultiClassLogisticRegression(\PYZus{}, iterations=1000, C=0, opt\PYZus{}method=\PYZsq{}bfgs\PYZsq{}, reg\PYZus{}method=\PYZsq{}Both\PYZsq{})
+         lr.fit(data, target) 
+         
+         prediction = lr.predict(data)
+         print(\PYZsq{}Accuracy of: \PYZsq{},accuracy\PYZus{}score(target,prediction))
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accuracy of:  0.6417624521072797
+CPU times: user 624 ms, sys: 903 ms, total: 1.53 s
+Wall time: 1.52 s
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{time}
+         lr\PYZus{}sk = LogisticRegression(solver=\PYZsq{}liblinear\PYZsq{}) 
+         lr\PYZus{}sk.fit(data, target) 
+         
+         prediction = lr\PYZus{}sk.predict(data)
+         print(\PYZsq{}Accuracy of: \PYZsq{},accuracy\PYZus{}score(target,prediction))
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accuracy of:  0.6388888888888888
+CPU times: user 13.9 ms, sys: 1.62 ms, total: 15.5 ms
+Wall time: 19.7 ms
+
+    \end{Verbatim}
+
+    As you can see in the above cells, we made each implementation of
+logistic regression go through ten iterations of training and testing.
+Then we took the accuracy mean of each implementation and compared them
+to each other. We found out our implementation of multi-class logistic
+regression is a little bit more accurate than scikit-learn's liblinear
+logistic regression. Yet as you can in our speed test, scikit-learn's
+implementation is nearly 77 times faster than our implementation.
+
+    \subsection{Deployment (10 points
+total)}\label{deployment-10-points-total}
+
+ Which implementation of logistic regression would you advise be used in
+a deployed machine learning model, your implementation or scikit-learn
+(or other third party)? Why? 
+
+    Although our implementation of logistic regression is slightly more
+accurate than scikit-learn's, our runtime speed is extremely slow. This
+reduction in speed is largely a result of the number of iteration steps
+our program has to take as it approaches the optimal weight vector. On
+the other hand, scikit-learn takes only one step to reach the optimal
+weight vector while maintaining a high accuracy. As mentioned before,
+scikit-learn's implementation runs 77 times faster than our own logistic
+regression. However, in the eyes of a school, speed would actually play
+less of an importance than accuracy. This is because a school would
+never really have to run this type of program online, and instead, could
+run the implementation offline in the beginning of the year for upcoming
+students. Thus, in selecting our most optimized version of logistic
+regression, a school would be best prepared to reach out to students
+most in need of academic support.
+
+    \subsection{Exceptional Work (10 points
+total)}\label{exceptional-work-10-points-total}
+
+ Implement an optimization technique for logistic regression using mean
+square error as your objective function (instead of binary entropy).
+Your solution should be able to solve the binary logistic regression
+problem in one gradient update step. 
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{k}{class} \PY{n+nc}{OptimizedBinaryLogisticRegression}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{eta}\PY{p}{,} \PY{n}{iterations}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{eta} \PY{o}{=} \PY{n}{eta}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{iters} \PY{o}{=} \PY{n}{iterations}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C} \PY{o}{=} \PY{n}{C}
+                 \PY{c+c1}{\PYZsh{} internally we will store the weights as self.w\PYZus{} to keep with sklearn conventions}
+         
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if}\PY{p}{(}\PY{n+nb}{hasattr}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Binary Logistic Regression Object with coefficients:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Untrained Binary Logistic Regression Object}\PY{l+s+s1}{\PYZsq{}}
+         
+             \PY{c+c1}{\PYZsh{} convenience, private:}
+             \PY{n+nd}{@staticmethod}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}add\PYZus{}bias}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{X}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} add bias term}
+         
+             \PY{n+nd}{@staticmethod}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}sigmoid}\PY{p}{(}\PY{n}{theta}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} increase stability, redefine sigmoid operation}
+                 \PY{k}{return} \PY{n}{expit}\PY{p}{(}\PY{n}{theta}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} vectorized gradient calculation with regularization using L2 Norm}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}get\PYZus{}gradient}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{ydiff} \PY{o}{=} \PY{n}{y}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{add\PYZus{}bias}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} get y difference}
+                 \PY{n}{gradient} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{X} \PY{o}{*} \PY{n}{ydiff}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{} make ydiff a column vector and multiply through}
+         
+                 \PY{n}{gradient} \PY{o}{=} \PY{n}{gradient}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+                 \PY{n}{gradient}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C}
+                 \PY{k}{return} \PY{n}{gradient}
+         
+             \PY{c+c1}{\PYZsh{} public:}
+             \PY{k}{def} \PY{n+nf}{predict\PYZus{}proba}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{X}\PY{p}{,}\PY{n}{add\PYZus{}bias}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} add bias term if requested}
+                 \PY{n}{Xb} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}add\PYZus{}bias}\PY{p}{(}\PY{n}{X}\PY{p}{)} \PY{k}{if} \PY{n}{add\PYZus{}bias} \PY{k}{else} \PY{n}{X}
+                 \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}sigmoid}\PY{p}{(}\PY{n}{Xb} \PY{o}{@} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} return the probability y=1}
+         
+             \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{X}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.5}\PY{p}{)} \PY{c+c1}{\PYZsh{}return the actual prediction}
+         
+             \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{Xb} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}add\PYZus{}bias}\PY{p}{(}\PY{n}{X}\PY{p}{)} \PY{c+c1}{\PYZsh{} add bias term}
+                 \PY{n}{num\PYZus{}samples}\PY{p}{,} \PY{n}{num\PYZus{}features} \PY{o}{=} \PY{n}{Xb}\PY{o}{.}\PY{n}{shape}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}features}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} init weight vector to zeros}
+                 \PY{c+c1}{\PYZsh{} for as many as the max iterations}
+                 \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{iters}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{gradient} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}get\PYZus{}gradient}\PY{p}{(}\PY{n}{Xb}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}} \PY{o}{+}\PY{o}{=} \PY{n}{gradient}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{eta} \PY{c+c1}{\PYZsh{} multiply by learning rate }
+\end{Verbatim}
+
+
+    We will change the objective function by changing the derivate very
+partially and then implement it. When we use mean squared error, our
+solution should be able to solve binary logistic regression with mean
+squared error in one gradient step. There is a closed form solution for
+mean squared error for logistic regression so close to something we have
+already done
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{k}{class} \PY{n+nc}{OptimizedBFGSLogisticRegression}\PY{p}{(}\PY{n}{OptimizedBinaryLogisticRegression}\PY{p}{)}\PY{p}{:}
+         
+             \PY{n+nd}{@staticmethod}
+             \PY{k}{def} \PY{n+nf}{objective\PYZus{}function}\PY{p}{(}\PY{n}{w}\PY{p}{,}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{C}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{g} \PY{o}{=} \PY{n}{expit}\PY{p}{(}\PY{n}{X} \PY{o}{@} \PY{n}{w}\PY{p}{)}
+                 \PY{k}{return} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{g}\PY{p}{[}\PY{n}{y}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{g}\PY{p}{[}\PY{n}{y}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{C}\PY{o}{*}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{w}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+         
+             \PY{n+nd}{@staticmethod}
+             \PY{k}{def} \PY{n+nf}{objective\PYZus{}gradient}\PY{p}{(}\PY{n}{w}\PY{p}{,}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{C}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{g} \PY{o}{=} \PY{n}{expit}\PY{p}{(}\PY{n}{X} \PY{o}{@} \PY{n}{w}\PY{p}{)}
+                 \PY{n}{ydiff} \PY{o}{=} \PY{n}{y}\PY{o}{\PYZhy{}}\PY{n}{g} \PY{c+c1}{\PYZsh{} get y difference}
+                 \PY{n}{gradient} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{X} \PY{o}{*} \PY{n}{ydiff}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}         gradient = np.mean(mean\PYZus{}squared\PYZus{}error(X, ydiff[:,np.newaxis])) tried implementing this but it didn\PYZsq{}t work }
+                 \PY{n}{gradient} \PY{o}{=} \PY{n}{gradient}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{w}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+                 \PY{n}{gradient}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{*} \PY{n}{C}
+         
+                 \PY{k}{return} \PY{o}{\PYZhy{}}\PY{n}{gradient}
+         
+             \PY{c+c1}{\PYZsh{} just overwrite fit function}
+             \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{Xb} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}add\PYZus{}bias}\PY{p}{(}\PY{n}{X}\PY{p}{)} \PY{c+c1}{\PYZsh{} add bias term}
+                 \PY{n}{num\PYZus{}samples}\PY{p}{,} \PY{n}{num\PYZus{}features} \PY{o}{=} \PY{n}{Xb}\PY{o}{.}\PY{n}{shape}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}} \PY{o}{=} \PY{n}{fmin\PYZus{}bfgs}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{objective\PYZus{}function}\PY{p}{,} \PY{c+c1}{\PYZsh{} what to optimize}
+                                     \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}features}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{c+c1}{\PYZsh{} starting point}
+                                     \PY{n}{fprime}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{objective\PYZus{}gradient}\PY{p}{,} \PY{c+c1}{\PYZsh{} gradient function}
+                                     \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{Xb}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C}\PY{p}{)}\PY{p}{,} \PY{c+c1}{\PYZsh{} extra args for gradient and objective function}
+                                     \PY{n}{gtol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}03}\PY{p}{,} \PY{c+c1}{\PYZsh{} stopping criteria for gradient, |v\PYZus{}k|}
+                                     \PY{n}{maxiter}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{iters}\PY{p}{,} \PY{c+c1}{\PYZsh{} stopping criteria iterations}
+                                     \PY{n}{disp}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{w\PYZus{}}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}features}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{bfgslr} \PY{o}{=} \PY{n}{OptimizedBFGSLogisticRegression}\PY{p}{(}\PY{n}{\PYZus{}}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{)}
+         
+         \PY{n}{bfgslr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{target}\PY{p}{)}
+         \PY{n}{yhat} \PY{o}{=} \PY{n}{bfgslr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy of: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{target}\PY{p}{,}\PY{n}{yhat}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accuracy of:  0.5478927203065134
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
